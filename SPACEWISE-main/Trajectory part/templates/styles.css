@@ -1,0 +1,243 @@
+/* Add or adjust styles as needed */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+    background-size: cover; /* Ensure the background image covers the entire viewport */
+}
+.container {
+    max-width: 90%; /* Adjusted to percentage for responsiveness */
+    padding: 20px;
+    margin: auto; /* Center the container horizontally */
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.image-container img {
+    max-width: 40%; /* Ensure images resize with container */
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    
+}
+
+.button:hover {
+    background-color: #3366cc;
+}
+
+.researcher {
+    background-color: #ff6600;
+}
+
+.enthusiast {
+    background-color: #ffcc00;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3366cc;
+    color: #ffffff;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #004080;
+}
+
+.faq {
+    padding-top: 20%;
+    margin-bottom: 40px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.question h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.contact {
+    margin-top: 40px;
+}
+
+.contact p {
+    font-size: 1.2em;
+}
+
+.chat-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.chat-box {
+    max-height: 300px;
+    overflow-y: scroll;
+    padding-bottom: 10px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-message.bot {
+    background-color: #271414;
+}
+
+.chat-message.user {
+    background-color: #3366cc;
+    color: #fff;
+    text-align: right;
+}
+
+button#send-btn {
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    background-color: #3366cc;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+button#send-btn:hover {
+    background-color: #004080;
+}
+/* Style links as buttons */
+.links-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3366cc; /* Button background color */
+    color: #ffffff; /* Button text color */
+    text-decoration: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.links-container a:hover {
+    background-color: #004080; /* Button background color on hover */
+}
+
+.linkscolor a{
+    color: aliceblue;
+}
+
+
+
+
+/* Media Queries for responsiveness */
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 95%; /* Adjusted to percentage for responsiveness */
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 10px; /* Decrease gap between buttons */
+    }
+
+    .button {
+        width: 100%; /* Make buttons full-width */
+    }
+
+    .image-container img {
+        max-width: 100%; /* Adjust image size on smaller screens */
+    }
+
+    .faq {
+        padding-top: 10%; /* Adjust padding for FAQs */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        width: 100%; /* Ensure inputs and textareas fill container */
+    }
+}

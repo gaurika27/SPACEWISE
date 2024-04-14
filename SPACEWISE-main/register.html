@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <!-- <div class="form-group">
+                <label for="authcode">Authorised Code:</label>
+                <input type="text" id="authcode" name="authcode" required>
+            </div> -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" id="signUp" value="signup">Register</button>
+        </form>
+    </div>
+  
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBaiMdxnrW8_n_1DhGEz4s25UPW5ULJ2EY",
+            authDomain: "electrothon60.firebaseapp.com",
+            databaseURL: "https://electrothon60-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "electrothon60",
+            storageBucket: "electrothon60.appspot.com",
+            messagingSenderId: "377529767324",
+            appId: "1:377529767324:web:597aa3d2b79817028b6459"
+          };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth();
+    
+        // Wait for the DOM to load before accessing elements
+        document.addEventListener('DOMContentLoaded', () => {
+          document.getElementById('signUp').addEventListener('click', (e) => {
+            e.preventDefault();
+            var email=document.getElementById('email').value;
+            var password=document.getElementById('password').value;
+            var username=document.getElementById('username').value;
+    
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                set(ref(database,'users/' + user.uid),{
+                    username: username,
+                    email: email
+                })
+                alert('user created');
+                // ...
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+                // ..
+              });
+          });
+        });
+      </script>
+</body>
+
+</html>
+

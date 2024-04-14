@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fuel Consumption Calculation</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Fuel Consumption Calculation</h1>
+    <form id="fuel-form">
+      <label for="velocity">Velocity:</label>
+      <input
+        type="number"
+        step="any"
+        id="velocity"
+        name="velocity"
+        required
+      /><br /><br />
+
+      <label for="altitude">Altitude:</label>
+      <input
+        type="number"
+        step="any"
+        id="altitude"
+        name="altitude"
+        required
+      /><br /><br />
+
+      <label for="other-features">Other Features:</label>
+      <input
+        type="number"
+        step="any"
+        id="other-features"
+        name="other-features"
+        required
+      /><br /><br />
+
+      <button type="submit">Calculate Fuel Consumption</button>
+    </form>
+
+    <div id="fuel-result"></div>
+
+    <script>
+      document
+        .getElementById("fuel-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get input values
+          const velocity = parseFloat(
+            document.getElementById("velocity").value
+          );
+          const altitude = parseFloat(
+            document.getElementById("altitude").value
+          );
+          const otherFeatures = parseFloat(
+            document.getElementById("other-features").value
+          );
+
+          // Perform fuel consumption calculation
+          const fuelConsumption =
+            0.3 * velocity + 0.2 * altitude + 0.1 * otherFeatures;
+
+          // Display result
+          document.getElementById("fuel-result").innerHTML =
+            "<h2>Fuel Consumption:</h2><p>" + fuelConsumption + "</p>";
+        });
+    </script>
+  </body>
+</html>

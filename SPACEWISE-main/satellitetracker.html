@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Satellites</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.29/"></script>
+    <script src="https://developers.arcgis.com/javascript/latest//sample-code/satellites-3d/live/satellite.js"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/GraphicsLayer",
+        "esri/Graphic",
+        "esri/geometry/Point"
+      ], (Map, SceneView, GraphicsLayer, Graphic, Point) => {
+        const map = new Map({
+          basemap: "satellite"
+        });
+
+        const view = new SceneView({
+          container: "viewDiv",
+          map: map,
+          constraints: {
+            altitude: {
+              max: 12000000000 // meters
+            }
+          }
+        });
+
+        const satelliteLayer = new GraphicsLayer();
+        map.add(satelliteLayer);
+
+        // Define the initial satellite positions
+        let satellites = [
+          {'Satellite Name': 'SPACE STATION', 'Latitude': -9.6751505, 'Longitude': 178.07603364},
+          {'Satellite Name': 'KALAMSAT-V2/PSLV', 'Latitude': -67.69970304, 'Longitude': -109.49333937},
+          {'Satellite Name': 'ASTROSAT', 'Latitude': 0.7425922, 'Longitude': -56.07474449},
+          {'Satellite Name': 'CSS (TIANHE-1)', 'Latitude': -40.91494666, 'Longitude': 176.5891811},
+          {'Satellite Name': 'NOAA 20 (JPSS 1)', 'Latitude': -27.54679171, 'Longitude': 101.92107398}
+        ];
+
+        // Function to update satellite positions
+        function updateSatellitePositions() {
+          // Update satellite positions
+          satellites = satellites.map(satellite => {
+            // Simulate movement by adding small random changes to latitudes and longitudes
+            satellite.Latitude += Math.random() * 0.1 - 0.05;
+            satellite.Longitude += Math.random() * 0.1 - 0.05;
+            return satellite;
+          });
+
+          // Remove existing satellites from the map
+          satelliteLayer.removeAll();
+
+          // Add updated satellites to the map
+          satellites.forEach((satellite) => {
+            const graphic = new Graphic({
+              geometry: new Point({
+                type: "point",
+                longitude: satellite.Longitude,
+                latitude: satellite.Latitude
+              }),
+              symbol: {
+                type: "picture-marker",
+                url: "https://developers.arcgis.com/javascript/latest//sample-code/satellites-3d/live/satellite.png",
+                width: 48,
+                height: 48
+              },
+              attributes: {
+                name: satellite['Satellite Name'],
+                latitude: satellite.Latitude,
+                longitude: satellite.Longitude
+              }
+            });
+
+            satelliteLayer.add(graphic);
+          });
+        }
+
+        // Update satellite positions initially and every 5 seconds
+        updateSatellitePositions();
+        setInterval(updateSatellitePositions, 5000);
+
+        view.popup.defaultPopupTemplateEnabled = false;
+
+        view.on("click", (event) => {
+          view.hitTest(event).then((response) => {
+            const graphic = response.results.filter((result) => result.graphic.layer === satelliteLayer)[0].graphic;
+            if (graphic) {
+              const { name, latitude, longitude } = graphic.attributes;
+              alert(`${name}: Latitude ${latitude}, Longitude ${longitude}`);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>

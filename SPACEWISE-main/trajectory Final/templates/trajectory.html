@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trajectory Optimization</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Trajectory Optimization</h1>
+    <form id="trajectory-form">
+      <label for="initial-velocity">Initial Velocity:</label>
+      <input
+        type="number"
+        step="any"
+        id="initial-velocity"
+        name="initial-velocity"
+        required
+      /><br /><br />
+
+      <label for="launch-angle">Launch Angle:</label>
+      <input
+        type="number"
+        step="any"
+        id="launch-angle"
+        name="launch-angle"
+        required
+      /><br /><br />
+
+      <label for="atmospheric-conditions">Atmospheric Conditions:</label>
+      <input
+        type="number"
+        step="any"
+        id="atmospheric-conditions"
+        name="atmospheric-conditions"
+        required
+      /><br /><br />
+
+      <button type="submit">Calculate Trajectory</button>
+    </form>
+
+    <div id="trajectory-result"></div>
+
+    <script>
+      document
+        .getElementById("trajectory-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get input values
+          const initialVelocity = parseFloat(
+            document.getElementById("initial-velocity").value
+          );
+          const launchAngle = parseFloat(
+            document.getElementById("launch-angle").value
+          );
+          const atmosphericConditions = parseFloat(
+            document.getElementById("atmospheric-conditions").value
+          );
+
+          // Perform trajectory optimization calculation
+          const trajectoryOptimization =
+            0.5 * initialVelocity +
+            0.2 * launchAngle +
+            0.1 * atmosphericConditions;
+
+          // Display result
+          document.getElementById("trajectory-result").innerHTML =
+            "<h2>Optimized Trajectory:</h2><p>" +
+            trajectoryOptimization +
+            "</p>";
+        });
+    </script>
+  </body>
+</html>
